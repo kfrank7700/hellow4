@@ -13,7 +13,6 @@ import play.mvc.With;
  * Created by fkitema on 10/15/2017.
  */
 
-@With(CatchAction.class)
 public class Products extends Controller {
     private static final Form<Product> productForm = Form
             .form(Product.class);
