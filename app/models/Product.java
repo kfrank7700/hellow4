@@ -1,5 +1,6 @@
 package models;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import play.data.validation.Constraints;
 
@@ -28,6 +29,8 @@ public class Product {
     @Constraints.Required
     public String name;
     public String description;
+    public List<Tag> tags = new LinkedList<Tag>();
+
     public Product() {}
     public Product(String ean, String name, String description) {
         this.ean = ean;

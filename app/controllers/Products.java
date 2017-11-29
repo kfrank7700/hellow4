@@ -3,6 +3,8 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.products.*;
 import models.Product;
+import models.Tag;
+import java.util.ArrayList;
 import java.util.List;
 import play.data.Form;
 import play.mvc.With;
@@ -18,6 +20,7 @@ public class Products extends Controller {
             .form(Product.class);
 
     public static Result index() {
+
         return redirect(routes.Products.list(0));
     }
 
@@ -29,8 +32,8 @@ public class Products extends Controller {
     public static Result newProduct() {
         return ok(details.render(productForm));
     }
-    public static Result details(String ean) {
 
+    public static Result details(String ean) {
         final Product product = Product.findByEan(ean);
         if (product == null) {
             return notFound(String.format("Product %s does not exist.", ean));
@@ -46,6 +49,13 @@ public class Products extends Controller {
             return badRequest(details.render(boundForm));
         }
         Product product = boundForm.get();
+        List<Tag> tags = new ArrayList<Tag>();
+        for (Tag tag : product.tags) {
+            if (tag.id != null) {
+                tags.add(Tag.findById(tag.id));
+            }
+        }
+        product.tags = tags;
         product.save();
         flash("success",
                 String.format("Successfully added product %s", product));
