@@ -3,11 +3,14 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import play.data.validation.Constraints;
+import javax.persistence.*;
+import play.db.ebean.Model;
 
 /**
  * Created by fkitema on 10/15/2017.
  */
-public class Product {
+@Entity
+public class Product extends Model {
 
     private static List<Product> products;
     static {
@@ -24,11 +27,15 @@ public class Product {
                 "Paperclips description 5"));
     }
 
+    @Id
+    public Long id;
+
     @Constraints.Required
     public String ean;
     @Constraints.Required
     public String name;
     public String description;
+
     public List<Tag> tags = new LinkedList<Tag>();
 
     public Product() {}
@@ -65,6 +72,7 @@ public class Product {
     public static boolean remove(Product product) {
         return products.remove(product);
     }
+
     public void save() {
         products.remove(findByEan(this.ean));
         products.add(this);
