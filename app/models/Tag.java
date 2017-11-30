@@ -17,6 +17,7 @@ public class Tag {
             tags.add(new Tag(3L, "plastic",
                     Product.findByName("paperclips")));
         }
+
         public static Tag findById(Long id) {
             for (Tag tag : tags) {
                 if(tag.id == id) return tag;

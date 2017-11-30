@@ -1,5 +1,6 @@
 package controllers;
 import com.avaje.ebean.Ebean;
+import models.StockItem;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.products.*;
@@ -57,8 +58,14 @@ public class Products extends Controller {
             }
         }
         product.tags = tags;
+
+        StockItem item = new StockItem();
+        item.quantity = 0L;
+        item.product = product;
+
         //product.save();
         Ebean.save(product);
+        item.save();
         flash("success",
                 String.format("Successfully added product %s", product));
         return redirect(routes.Products.list(1));
