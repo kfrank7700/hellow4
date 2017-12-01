@@ -39,9 +39,12 @@ public class Product extends Model {
     @ManyToMany
     public List<Tag> tags = new LinkedList<Tag>();
 
+    public static Finder<Long, Product> find() {
+        return new Finder<Long, Product>(Long.class, Product.class);
+    }
 
-    public static Finder<Long, Product> find =
-            new Finder<>(Long.class, Product.class);
+    /*public static Finder<Long, Product> find =
+            new Finder<>(Long.class, Product.class); */
 
     public Product() {}
     public Product(String ean, String name, String description) {

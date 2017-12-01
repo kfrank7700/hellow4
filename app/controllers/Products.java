@@ -27,8 +27,9 @@ public class Products extends Controller {
     }
 
     public static Result list(Integer page) {
-        List<Product> products = Product.findAll();
-        return ok(list.render(products));
+        //List<Product> products = Product.findAll();
+        List<Product>  products1 = Product.find().findList();
+        return ok(list.render(products1));
     }
 
     public static Result newProduct() {
