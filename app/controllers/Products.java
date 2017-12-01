@@ -58,13 +58,13 @@ public class Products extends Controller {
             }
         }
         product.tags = tags;
-
         StockItem item = new StockItem();
-        item.quantity = 0L;
+        item.quantity = 1L;
         item.product = product;
 
         //product.save();
-        Ebean.save(product);
+        //Ebean.save(product);
+        product.save();
         item.save();
         flash("success",
                 String.format("Successfully added product %s", product));

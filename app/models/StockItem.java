@@ -13,6 +13,7 @@ import javax.persistence.*;
 public class StockItem extends Model {
     @Id
     public Long id;
+    @ManyToOne
     public Warehouse warehouse;
     @ManyToOne
     public Product product;

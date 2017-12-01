@@ -4,8 +4,10 @@ package models;
  * Created by fkitema on 11/23/2017.
  */
 import play.data.validation.Constraints;
+import javax.persistence.*;
 import java.util.*;
 
+@Entity
 public class Tag {
 
         private static List<Tag> tags = new LinkedList<Tag>();
@@ -25,10 +27,11 @@ public class Tag {
             return null;
         }
 
-
+    @Id
     public Long id;
     @Constraints.Required
     public String name;
+    @ManyToMany(mappedBy="tags")
     public List<Product> products;
 
     public Tag(){

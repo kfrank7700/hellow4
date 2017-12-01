@@ -29,14 +29,19 @@ public class Product extends Model {
 
     @Id
     public Long id;
-
     @Constraints.Required
     public String ean;
     @Constraints.Required
     public String name;
     public String description;
-
+    @OneToMany(mappedBy="product")
+    public List<StockItem> stockItems;
+    @ManyToMany
     public List<Tag> tags = new LinkedList<Tag>();
+
+
+    public static Finder<Long, Product> find =
+            new Finder<>(Long.class, Product.class);
 
     public Product() {}
     public Product(String ean, String name, String description) {
@@ -73,10 +78,10 @@ public class Product extends Model {
         return products.remove(product);
     }
 
-    public void save() {
+ /*   public void save() {
         products.remove(findByEan(this.ean));
         products.add(this);
-    }
+    }*/
 
 
 
